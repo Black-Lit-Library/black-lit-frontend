@@ -1,11 +1,30 @@
 import React from 'react';
-// import { useFormState } from 'react-use-form-state';
-// import Login from '../components/users/Login';
+import {
+  Switch,
+  Route,
+  BrowserRouter
+} from 'react-router-dom';
+import SignUp from '../components/users/SignUp';
 import UserLogin from '../components/users/UserLogin';
 
-export const BLLContainer = () => {
+export function BLLContainer() {
 
-  return <UserLogin />;
-};
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/:signup">
+          <SignUp />
+        </Route>
+        <Route path="/">
+          <UserLogin />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+    
+  );
+  
+  
+  
+}
 
 export default BLLContainer;

@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-// import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   useSignInWithEmailAndPassword,
 } from 'react-firebase-hooks/auth';
 
 const UserLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [pin, setPin] = useState('');
   const [
     signInWithEmailAndPassword,
     user,
     loading,
     error,
-  ] = useSignInWithEmailAndPassword([email, password]);
-  // const { id } = useParams();
+  ] = useSignInWithEmailAndPassword([username, pin]);
 
   if (error) {
     return (
@@ -22,9 +21,11 @@ const UserLogin = () => {
         width: 'auto',
         height: '10vh',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto',
+        padding: '15px'
       }}>
         <p>Error: {error.message}</p>;
       </div>
@@ -40,9 +41,11 @@ const UserLogin = () => {
         width: 'auto',
         height: '10vh',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 'auto',
+        margin:'auto',
+        padding: '15px',
       }}>
         <p>Welcome, {user.email}</p>
       </div>
@@ -52,43 +55,46 @@ const UserLogin = () => {
     <>
       <div style={{
         backgroundColor: 'gray',
-        width: 'auto',
-        height: '10vh',
+        width: '50vw',
+        height: 'auto',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto',
+        padding: '15px'
       }}>
-        <label htmlFor="username">Email:{' '}</label>
+        <label
+          htmlFor="username"
+          style={{ margin: '2px', padding: '2px' }}
+        >Username:</label>
         <input
           id="username"
           type="text"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
         />
-        <label htmlFor="pin">Password:{' '}</label>
+        <label
+          htmlFor="pin"
+          style={{ margin: '2px', padding: '2px' }}
+        >Pin:</label>
         <input
           id="pin"
           type="text"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
+          value={pin}
+          onChange={(event) => setPin(event.target.value)}
         />
-        <button onClick={() => signInWithEmailAndPassword(email, password)
-        }>
+        <button
+          style={{ margin: '2px', padding: '2px' }}
+          onClick={() => signInWithEmailAndPassword(username, pin)
+          }>
           Login
         </button>
-      </div>
-      <div style={{
-        backgroundColor: 'gray',
-        width: 'auto',
-        height: '5vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 'auto',
-      }}
-      >
-        <button>Create An Account</button>
+        <Link to="/signup">
+          <button
+            style={{ margin: '2px', padding: '2px' }}
+          >Create An Account</button>
+        </Link>
       </div>
     </>
   );
