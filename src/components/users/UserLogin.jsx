@@ -85,15 +85,20 @@ const UserLogin = () => {
           onChange={(event) => setPin(event.target.value)}
         />
         <button
-          style={{ margin: '2px', padding: '2px' }}
+          style={{ margin: '10px', padding: '5px' }}
           onClick={() => signInWithEmailAndPassword(username, pin)
           }>
           Login
         </button>
         <Link to="/signup">
           <button
-            style={{ margin: '2px', padding: '2px' }}
+            style={{ margin: '5px', padding: '3px' }}
           >Create An Account</button>
+        </Link>
+        <Link to="/">
+          <button
+            style={{ margin: '5px', padding: '3px' }}
+          >Home</button>
         </Link>
       </div>
     </>

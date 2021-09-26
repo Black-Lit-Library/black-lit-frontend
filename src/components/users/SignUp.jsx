@@ -15,13 +15,13 @@ const SignUp = () => {
     user,
     loading,
     error,
-  ] = useCreateUserWithEmailAndPassword([
-    firstName,
-    lastName,
-    userName,
-    email,
-    pin
-  ]);
+  ] = useCreateUserWithEmailAndPassword(
+    // firstName,
+    // lastName,
+    // userName,
+    // email,
+    // pin
+  );
 
   if (error) {
     return (
@@ -124,7 +124,7 @@ const SignUp = () => {
           onChange={(event) => setPin(event.target.value)}
         />
         <button
-          style={{ margin: '10px', padding: '5px' }}
+          style={{ margin: '15px', padding: '5px' }}
           onClick={() =>
             createUserWithEmailAndPassword(
               firstName,
@@ -135,8 +135,15 @@ const SignUp = () => {
           }>
           Sign Up/Create An Account!
         </button>
+        <Link to="/login">
+          <button
+            style={{ margin: '5px', padding: '3px' }}
+          >Login</button>
+        </Link>
         <Link to="/">
-          <button>Home</button>
+          <button
+            style={{ margin: '5px', padding: '3px' }}
+          >Home</button>
         </Link>
       </div>
     </>
