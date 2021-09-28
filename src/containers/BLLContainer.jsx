@@ -5,7 +5,8 @@ import {
   BrowserRouter
 } from 'react-router-dom';
 import HomePage from '../components/HomePage';
-import SignUp from '../components/users/SignUp';
+// import SignUp from '../components/users/SignUp';
+import SignUpUser from '../components/users/SignUpUser';
 import UserLogin from '../components/users/UserLogin';
 
 export function BLLContainer() {
@@ -14,7 +15,7 @@ export function BLLContainer() {
     <BrowserRouter>
       <Switch>
         <Route path="/signup">
-          <SignUp />
+          <SignUpUser />
         </Route>
         <Route path="/login">
           <UserLogin />

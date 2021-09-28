@@ -2,7 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => (
-  <>
+  <div style={{
+    backgroundColor: 'gray',
+    width: 'auto',
+    height: '10vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 'auto',
+    padding: '15px'
+  }}
+  >
     <h1>Welcome</h1>
     <div>
       <Link to="/signup">
@@ -12,7 +23,7 @@ const HomePage = () => (
         <button>Login</button>
       </Link>
     </div>
-  </>
+  </div>
 );
 
 export default HomePage;

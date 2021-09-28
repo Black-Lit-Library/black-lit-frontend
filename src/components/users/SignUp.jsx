@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { createUser } from '../../utils/userUtils';
 import {
   useCreateUserWithEmailAndPassword
 } from 'react-firebase-hooks/auth';
 
+
 const SignUp = () => {
+  // const [loading] = useState('');
+  // const [user, setUser] = useState({});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
@@ -15,13 +19,8 @@ const SignUp = () => {
     user,
     loading,
     error,
-  ] = useCreateUserWithEmailAndPassword(
-    // firstName,
-    // lastName,
-    // userName,
-    // email,
-    // pin
-  );
+  ] = useCreateUserWithEmailAndPassword();
+
 
   if (error) {
     return (
@@ -40,6 +39,9 @@ const SignUp = () => {
       </div>
     );
   }
+
+  
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -125,14 +127,17 @@ const SignUp = () => {
         />
         <button
           style={{ margin: '15px', padding: '5px' }}
-          onClick={() =>
-            createUserWithEmailAndPassword(
-              firstName,
+          onClick={(event) => {
+            event.preventDefault();
+            createUserWithEmailAndPassword(createUser(firstName,
               lastName,
               userName,
               email,
-              pin)
-          }>
+              pin));
+            console.log(user);
+            // useHistory(`/profile/${user.id}`);
+          }
+          } >
           Sign Up/Create An Account!
         </button>
         <Link to="/login">

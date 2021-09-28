@@ -12,7 +12,7 @@ const UserLogin = () => {
     user,
     loading,
     error,
-  ] = useSignInWithEmailAndPassword([username, pin]);
+  ] = useSignInWithEmailAndPassword();
 
   if (error) {
     return (
