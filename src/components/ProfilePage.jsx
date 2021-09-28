@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 // import useLocalStorage from 'react-localstorage-hook';
-import { updateUser } from '../utils/userUtils';
+// import { updateUser } from '../utils/userUtils';
 
 
 
@@ -17,10 +17,13 @@ const ProfilePage = () => {
   return (
     <>
       <div>
-        <h1>Profile Page</h1>
-        <p>User Info Displayed Here</p>
+        <h1>{`${localStorage.userName}`}Profile Page</h1>
+        <p>{`${localStorage.firstName}`}</p>
+        <p>{`${localStorage.lastName}`}</p>
+        <p>{`${localStorage.email}`}</p>
+        <p>{`${localStorage.userName}`}</p>
         {/* Update Profile connects to PUT route */}
-        <button onClick>Update Profile</button>
+        <button>Update Profile</button>
         {/* Logout uses window.location to return home 
     and set back to initial state */}
         <button>Delete Account</button>

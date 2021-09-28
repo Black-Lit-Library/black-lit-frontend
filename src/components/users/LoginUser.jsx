@@ -9,8 +9,8 @@ localStorage.removeItem(LOCAL_USER);
 
 export default function LoginUserForm() {
   const [formState, { text, password }] = useFormState();
-  const [ user, setUser ] = useState(null);
-  const [ localUser, setLocalUser ] = useLocalStorage(LOCAL_USER, {});
+  const [user, setUser] = useState(null);
+  const [localUser, setLocalUser] = useLocalStorage(LOCAL_USER, {});
   const history = useHistory();
 
   async function handleSubmit(event) {

@@ -44,6 +44,7 @@ export default function SignUpForm() {
       padding: '15px'
     }} >
       <form
+        aria-label="sign up"
         style={{
           display: 'flex',
           flexDirection: 'column'
