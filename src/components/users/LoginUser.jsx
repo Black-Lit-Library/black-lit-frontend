@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import useLocalStorage from 'react-localstorage-hook';
 import { useFormState } from 'react-use-form-state';
 import { getUser } from '../../utils/userUtils';
 import { Link, useHistory } from 'react-router-dom';
 
+const LOCAL_USER = {};
+localStorage.removeItem(LOCAL_USER);
+
 export default function LoginUserForm() {
   const [formState, { text, password }] = useFormState();
-  const [user, setUser] = useState(null);
+  const [ user, setUser ] = useState(null);
+  const [ localUser, setLocalUser ] = useLocalStorage(LOCAL_USER, {});
   const history = useHistory();
 
   async function handleSubmit(event) {
@@ -13,6 +18,7 @@ export default function LoginUserForm() {
     console.log(formState, 'login form state yall');
     const fetchedUser = await getUser(formState.values.userName);
     setUser(fetchedUser);
+    setLocalUser({ ...localUser, fetchedUser });
     history.push(`/${formState.values.userName}`);
   }
 
