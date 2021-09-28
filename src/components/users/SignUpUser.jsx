@@ -13,8 +13,7 @@ export default function SignUpForm() {
     {
       withIds: true
     });
-  const [ user, setUser ] = useState(null);
-  
+  const [user, setUser] = useState(null);
   const history = useHistory();
 
   async function handleSubmit(event) {
@@ -22,6 +21,7 @@ export default function SignUpForm() {
     console.log(formState, 'form state yall');
     const newUser = await createUser(formState.values);
     setUser(newUser);
+    localStorage.setItem(user);
     history.push(`/${formState.values.userName}`);
     
   }

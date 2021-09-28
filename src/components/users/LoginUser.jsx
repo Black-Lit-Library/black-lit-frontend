@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useFormState } from 'react-use-form-state';
 import { getUser } from '../../utils/userUtils';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function LoginUserForm() {
   const [formState, { text, password }] = useFormState();
   const [user, setUser] = useState(null);
+  const history = useHistory();
 
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(formState, 'login form state yall');
     const fetchedUser = await getUser(formState.values.userName);
     setUser(fetchedUser);
+    history.push(`/${formState.values.userName}`);
   }
 
   return (
