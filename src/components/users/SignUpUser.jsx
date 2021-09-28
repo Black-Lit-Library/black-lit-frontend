@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import useLocalStorage from 'react-localstorage-hook';
 import { useFormState } from 'react-use-form-state';
 import { createUser } from '../../utils/userUtils';
-import { Link, useHistory } from 'react-router-dom';
+
+const LOCAL_USER = {};
+localStorage.removeItem(LOCAL_USER);
 
 export default function SignUpForm() {
   const [formState, {
@@ -14,6 +18,7 @@ export default function SignUpForm() {
       withIds: true
     });
   const [user, setUser] = useState(null);
+  const [localuser, setLocalUser] = useLocalStorage(LOCAL_USER, {});
   const history = useHistory();
 
   async function handleSubmit(event) {
@@ -21,7 +26,7 @@ export default function SignUpForm() {
     console.log(formState, 'form state yall');
     const newUser = await createUser(formState.values);
     setUser(newUser);
-    localStorage.setItem(user);
+    setLocalUser({ ...localuser, newUser });
     history.push(`/${formState.values.userName}`);
     
   }
