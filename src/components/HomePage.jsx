@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const HomePage = () => (
   <div style={{
     backgroundColor: 'gray',
-    width: 'auto',
-    height: '10vh',
+    width: '40vw',
+    height: 'auto',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

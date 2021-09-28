@@ -5,22 +5,26 @@ import {
   BrowserRouter
 } from 'react-router-dom';
 import HomePage from '../components/HomePage';
-// import SignUp from '../components/users/SignUp';
 import SignUpUser from '../components/users/SignUpUser';
-import UserLogin from '../components/users/UserLogin';
+// import UserLogin from '../components/users/UserLogin';
+import LoginUserForm from '../components/users/LoginUser';
+import ProfilePage from '../components/ProfilePage';
 
 export function BLLContainer() {
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/signup">
+        <Route exact path="/signup">
           <SignUpUser />
         </Route>
-        <Route path="/login">
-          <UserLogin />
+        <Route exact path="/login">
+          <LoginUserForm />
         </Route>
-        <Route path="/">
+        <Route exact path="/:username" >
+          <ProfilePage />
+        </Route>
+        <Route exact path="/">
           <HomePage />
         </Route>
       </Switch>
