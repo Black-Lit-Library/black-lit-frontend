@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
-// import useLocalStorage from 'react-localstorage-hook';
-// import { updateUser } from '../utils/userUtils';
-import { deleteUser } from '../utils/userUtils';
-
-
+import User from './users/User';
+import { deleteUser, getUser, updateUser } from '../utils/userUtils';
 
 const ProfilePage = () => {
   const { username } = useParams();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const history = useHistory();
+
+  useEffect(() => (
+    getUser({ username })
+      .then((user) => {
+        setUser(user);
+        console.log(user);
+      })
+  ), []);
+
   // async function handleUpdateProfile(event) {
   //   event.preventDefault();
   //   const updateProfile = await updateUser();
@@ -23,14 +29,18 @@ const ProfilePage = () => {
     history.push('/');
   }
 
+
   return (
     <>
       <div>
-        <h1>{`${localStorage.userName}`}Profile Page</h1>
-        <p>{`${localStorage.firstName}`}</p>
-        <p>{`${localStorage.lastName}`}</p>
-        <p>{`${localStorage.email}`}</p>
-        <p>{`${localStorage.userName}`}</p>
+        <User
+          firstName={user.firstName}
+          lastName={user.lastName}
+          email={user.email}
+          userName={user.userName}
+          pin={user.pin}
+        />
+        
         {/* Update Profile connects to PUT route */}
         <button>Update Profile</button>
         {/* Logout uses window.location to return home 
