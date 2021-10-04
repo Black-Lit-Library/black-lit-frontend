@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import useLocalStorage from 'react-localstorage-hook';
-import { useFormState } from 'react-use-form-state';
 import { getUser } from '../../utils/userUtils';
 import { Link, useHistory } from 'react-router-dom';
 
-const LOCAL_USER = {};
-localStorage.removeItem(LOCAL_USER);
-
 export default function LoginUserForm() {
-  const [formState, { text, password }] = useFormState();
-  const [user, setUser] = useState(null);
-  const [localUser, setLocalUser] = useLocalStorage(LOCAL_USER, {});
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    userName: '',
+    pin: ''
+  });
   const history = useHistory();
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log(formState, 'login form state yall');
-    const fetchedUser = await getUser(formState.values.userName);
-    setUser(fetchedUser);
-    setLocalUser({ ...localUser, fetchedUser });
-    history.push(`/${formState.values.userName}`);
+    const fetchedUser = await getUser(user.userName);
+    console.log(fetchedUser, 'fetched user');
+    setUser({ fetchedUser });
+    console.log(user, 'this is our logged in user');
+    history.push(`/${user.userName}`);
   }
 
   return (
@@ -45,11 +44,29 @@ export default function LoginUserForm() {
         <label htmlFor="username"
           style={{ margin: '2px', padding: '2px' }}
         >Username:{' '}</label>
-        <input {...text('userName')} />
+        <input
+          name="username"
+          type="text"
+          value={user.username}
+          role="textbox"
+          aria-label="username"
+          onChange={({ target }) => setUser({
+            username: target.value
+          })}
+        />
         <label htmlFor="pin"
           style={{ margin: '2px', padding: '2px' }}
         >Pin:{' '}</label>
-        <input {...password('pin')} />
+        <input
+          name="pin"
+          type="text"
+          value={user.pin}
+          role="textbox"
+          aria-label="pin"
+          onChange={({ target }) => setUser({
+            pin: target.value
+          })}
+        />
         <button
           style={{ margin: '15px', padding: '5px' }}
         >Login!</button>
